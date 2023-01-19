@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AdvancedFrameworkSeleniumJava" verbose="10" preserve-order="true">
+<!-- parallel="tests" thread-count="4" -->
+   <test name="Test1">
+        <!-- 	  <groups>
+                <run>
+                    <include name="Sanity" />
+                </run>
+            </groups> -->
+
+          <classes>
+               <class
+                    name="com.mycom.aut.application.ApplicationTest1">
+                </class>
+            </classes>
+    </test>
+    <!-- <test name="Test2">
+        	  <groups>
+                <run>
+                    <include name="Sanity" />
+                </run>
+            </groups>
+
+          <classes>
+               <class
+                    name="com.mycom.aut.application.ApplicationTest2">
+                </class>
+            </classes>
+    </test> -->
+   
+   
+</suite>
