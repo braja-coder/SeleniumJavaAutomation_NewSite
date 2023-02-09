@@ -12,10 +12,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 
-import com.main.allvariables.AllVariables;
+import com.main.allvariables.Declarations;
 import com.main.properties.Commonconfig;
 
-public class Base extends AllVariables{
+public class Base extends Declarations{
 
        public  void setupDriver(String browser) {
         if (browser.equalsIgnoreCase("IE")) {

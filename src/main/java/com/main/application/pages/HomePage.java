@@ -19,23 +19,24 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.main.allvariables.AllVariables;
+import com.main.allvariables.Declarations;
 
 
-public class HomePage{
-	WebDriver driver;
-	public HomePage(WebDriver driver) {
+
+public class HomePage {
+ private WebDriver driver = Declarations.driver;
+	public HomePage() {
 		PageFactory.initElements(driver, this);
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 2), this);
 	}
-	@FindBy (xpath="//li/a[text()='Tablets']")
-	public WebElement tabletLink;
+	@FindBy (xpath="//li[@aria-label='Sign Up']/a[text()='Sign Up']")
+	public WebElement signupLink;
 	
-	@FindBy (xpath="//div[@class='list-group']//a[contains(text(),'Laptops & Notebooks')]")
-	public WebElement LaptopNotebookLink;
+	@FindBy (xpath="//li[@aria-label='Login']/a[text()='Login']")
+	public WebElement loginLink;
 	
-	@FindBy (xpath="//img[contains(@title,'LP3065')]")
-	public WebElement LaptopLink;
+	@FindBy (xpath="//span[text()='Company']")
+	public WebElement companyTab;
 
 	public void waitForPageToLoad(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));

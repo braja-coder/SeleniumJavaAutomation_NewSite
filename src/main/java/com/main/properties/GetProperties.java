@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import com.main.allvariables.AllVariables;
+import com.main.allvariables.Declarations;
 
 public class GetProperties {
     static String path = "/src/test/resources/propertyfiles/common/";
