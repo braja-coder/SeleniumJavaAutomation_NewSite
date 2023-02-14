@@ -29,9 +29,14 @@ public class LoginPage {
 	@FindBy (xpath="//input[@id='inputPassword']")
 	public WebElement inputPassword;
 	
+	@FindBy (xpath="//span[@id='recaptcha-anchor']/div[1]")
+	public WebElement captcha;
+	
 	@FindBy (xpath="//button[@id='login']")
 	public WebElement buttonLogin;
 
+	@FindBy (xpath="//div[contains(text(),'Login Details Incorrect.')]")
+	public WebElement verifyLoginFailed;
 	
 	public void waitForPageToLoad() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

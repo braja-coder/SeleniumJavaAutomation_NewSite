@@ -25,12 +25,12 @@ import org.openqa.selenium.support.ui.Select;
 
 public class SeleniumUtil extends Base {
 
-    public void mouseHover(WebElement mouseHoverToelement) {
+    public static void mouseHover(WebElement mouseHoverToelement) {
         Actions action = new Actions(driver);
         action.moveToElement(mouseHoverToelement).build().perform();
     }
 
-    public void maximize() {
+    public static void maximize() {
         driver.manage().window().maximize();
     }
 
@@ -45,7 +45,7 @@ public class SeleniumUtil extends Base {
         return destination;
     }
 
-    public boolean isElementPresent(WebElement element) {
+    public static boolean isElementPresent(WebElement element) {
         if (element.isDisplayed()) {
             return true;
         }
@@ -57,20 +57,12 @@ public class SeleniumUtil extends Base {
         dropdown.selectByVisibleText(text);
     }
 
-    public void selectValuedropDownValue(WebElement element, String value) {
+    public static void selectValuedropDownValue(WebElement element, String value) {
         Select dropdown = new Select(element);
         dropdown.selectByValue(value);
     }
 
-    public void entervalueEditField(WebElement element, String value) {
-        element.sendKeys(value);
-    }
-
-    public void clickonElement(WebElement element) {
-        element.click();
-    }
-
-    public void clickElementByCssSelector(WebElement element) {
+    public static void clickElementByCssSelector(WebElement element) {
         driver.findElement(By.cssSelector("")).click();
     }
 
@@ -78,54 +70,36 @@ public class SeleniumUtil extends Base {
         driver.manage().timeouts().pageLoadTimeout(5000, TimeUnit.SECONDS);
     }
 
-    public void pageDown() throws AWTException {
+    public static void pageDown() throws AWTException {
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_PAGE_DOWN);
     }
 
-    public void pageUp() throws AWTException {
+    public static void pageUp() throws AWTException {
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_PAGE_UP);
     }
 
-    public String getCurrentWindowHandle() {
-        return driver.getWindowHandle();
-
-    }
-
-    public boolean switchToWindow(String parentwindow) {
-        boolean b = false;
-        Set<String> handles = driver.getWindowHandles();
-        for (String windowHandle : handles) {
-            if (!windowHandle.equals(parentwindow)) {
-                try {
-                    driver.switchTo().window(windowHandle);
-                    System.out.println("##################################################################" + windowHandle);
-                    b = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("************************Not able to switch to child window*************************");
-                    b = false;
-                }
-            }
-        }
-        return b;
-    }
-
-    public void switchToParentWindow(String windowhandle) {
-        driver.switchTo().window(windowhandle);
-    }
-
-    public void switchToFrame() {
+   public static void switchToWindow() {
+    	 String parentWindow = driver.getWindowHandle();
+    	 Set<String> set  = driver.getWindowHandles();
+		 for(String windowHandle : set) {
+			 if(!windowHandle.equals(parentWindow)) {
+				 driver.switchTo().window(windowHandle);
+			}
+      }
+  }
+  
+   public void switchToFrame() {
         driver.switchTo().frame(0);
     }
 
-    public void javaScriptClick(WebElement element) {
+    public static void javaScriptClick(WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("document.getElementById(element).click();");
     }
 
-    public boolean isAlertPresent() {
+    public static boolean isAlertPresent() {
         try {
             driver.switchTo().alert();
             return true;
