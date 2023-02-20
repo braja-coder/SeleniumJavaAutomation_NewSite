@@ -29,6 +29,8 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 2), this);
 	}
+	
+	String verifyHomePageLoaded = "//text[@id='PHPTRAVELS']";
 	@FindBy (xpath="//li[@aria-label='Sign Up']/a[text()='Sign Up']")
 	public WebElement signupLink;
 	
@@ -38,9 +40,10 @@ public class HomePage {
 	@FindBy (xpath="//span[text()='Company']")
 	public WebElement companyTab;
 
-	public void waitForPageToLoad(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+	public void waitForPageToLoad() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(verifyHomePageLoaded)));
+	
 	}
 	
 }

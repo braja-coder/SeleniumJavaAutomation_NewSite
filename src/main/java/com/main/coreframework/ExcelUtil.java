@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,16 +15,16 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtil {
-	private XSSFWorkbook workbook;
-	private XSSFSheet sheet;
-	private FileInputStream fis;
-	private Map<String,String> map;
-	private ArrayList<Map<String,String>> dataList;
-	private ArrayList headerList;
-	private String fileName = ".\\testdata\\TestData.xlsx";
-	public void testDataExccel() {
+	private static XSSFWorkbook workbook;
+	private static XSSFSheet sheet;
+	private static FileInputStream fis;
+	private static Map<String,String> map;
+	private static ArrayList<Map<String,String>> dataList;
+	private static ArrayList headerList;
+	private static String fileName = ".\\src\\test\\resources\\excelsheets\\TestData.xlsx";
+	private static Object [][] loginData;
 	
-		System.out.println(fileName);
+	public static List testDataExcel() {
 		try {
 			fis = new FileInputStream(fileName);
 			workbook = new XSSFWorkbook(fis);
@@ -51,6 +52,34 @@ public class ExcelUtil {
 	  }catch (IOException e) {
 			e.printStackTrace();
 		}
+		return dataList;
+	
+	}
+	public static Object[][] testDataExcelReturnTwoDArray() {
+		System.out.println("**********************************" + fileName);
+		try {
+			fis = new FileInputStream(fileName);
+			workbook = new XSSFWorkbook(fis);
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			int totalRows = sheet.getLastRowNum();
+			System.out.println("totalRows"+totalRows);
+			int totalCols = sheet.getRow(0).getLastCellNum();
+			System.out.println("totalCols"+totalCols);
+			loginData = new Object[totalRows][totalCols];
+			int ci=0;
+		  for (int i = 1; i <=totalRows; i++) {
+				XSSFRow row = sheet.getRow(i);
+				for (int j = 0; j < totalCols; j++) {
+			     	XSSFCell cell = row.getCell(j);
+					String value = cell.getStringCellValue().trim();
+					loginData[ci][j] = value;
+					}
+				ci++;
+		   }
+	  }catch (IOException e) {
+			e.printStackTrace();
+		}
+		return loginData;
 	
 	}
 }

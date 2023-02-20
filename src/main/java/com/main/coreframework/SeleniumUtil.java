@@ -20,6 +20,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -90,6 +91,9 @@ public class SeleniumUtil extends Base {
       }
   }
   
+   public static void switchToTab() {
+	   driver.switchTo().newWindow(WindowType.TAB);
+   }
    public void switchToFrame() {
         driver.switchTo().frame(0);
     }

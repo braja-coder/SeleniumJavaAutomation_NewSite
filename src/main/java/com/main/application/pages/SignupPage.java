@@ -21,6 +21,8 @@ public class SignupPage extends Base {
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 2), this);
 	}
 	
+	String verifySignUpPageLoaded = "//a[contains(text(),'PHPTRAVELS')]";
+			
 	@FindBy (xpath="//input[@id='inputFirstName']")
 	public WebElement firstName;
 	
@@ -66,9 +68,10 @@ public class SignupPage extends Base {
 	@FindBy (xpath="//input[@type='submit']")
 	public WebElement registerButton;
 	
-	public void waitForPageToLoad(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+	public void waitForPageToLoad() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(verifySignUpPageLoaded)));
+	
 	}
 	
 	 public static void highLightElement(WebDriver driverHighLightElement, WebElement element) throws InterruptedException {

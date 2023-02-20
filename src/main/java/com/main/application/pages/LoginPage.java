@@ -11,6 +11,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.util.Assert;
 import com.main.allvariables.Declarations;
 
 public class LoginPage {
@@ -20,6 +21,9 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 2), this);
 	}
+	
+	String verifyLoginPageLoaded = "//h6[text()='Login']";
+	
 	@FindBy (xpath="//p[contains(text(),'Sign in to your account to continue.')]")
 	public WebElement verifyLoginPage;
 	
@@ -38,12 +42,18 @@ public class LoginPage {
 	@FindBy (xpath="//div[contains(text(),'Login Details Incorrect.')]")
 	public WebElement verifyLoginFailed;
 	
+	
+	
+	public String verifyLoginPage() {
+		String loginText = verifyLoginPage.getText();
+		return loginText;
+	}
+	
+	
 	public void waitForPageToLoad() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(verifyLoginPage));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(verifyLoginPageLoaded)));
 	
 	}
 
-
-	
 }

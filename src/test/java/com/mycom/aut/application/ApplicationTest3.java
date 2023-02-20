@@ -22,7 +22,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import junit.framework.Assert;
 
 
-public class ApplicationTest1 extends BaseTest {
+public class ApplicationTest3 extends BaseTest {
  
 	@Test
 	public void navigateToLoginPage() {
@@ -34,7 +34,7 @@ public class ApplicationTest1 extends BaseTest {
         homePage.loginLink.click();
         SeleniumUtil.switchToWindow();
 	}
-    @Test(priority=0, dataProvider = "loginData", dependsOnMethods= {"navigateToLoginPage"})
+    @Test(priority=0, dataProvider = "loginDataFromExcel",dataProviderClass = BaseTest.class, dependsOnMethods= {"navigateToLoginPage"})
      public void loginWithMultipleUser(String email, String password) {
     	try {
         LoginPage loginPage = new LoginPage();

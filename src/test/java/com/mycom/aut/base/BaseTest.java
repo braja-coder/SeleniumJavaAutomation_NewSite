@@ -16,6 +16,7 @@ import org.testng.annotations.DataProvider;
 import com.main.allvariables.Declarations;
 import com.main.application.pages.HomePage;
 import com.main.coreframework.Base;
+import com.main.coreframework.ExcelUtil;
 import com.main.coreframework.SeleniumUtil;
 import com.main.properties.Commonconfig;
 import com.main.report.ExtentReport;
@@ -28,7 +29,7 @@ public class BaseTest extends Base{
 	    public void initializeExtentReportAndSetLogs() {
 	        report = ExtentReport.initializeReportConfig();
 	        log = Logger.getLogger(BaseTest.class);
-	        PropertyConfigurator.configure("D:\\Selenium-Java-Karate-Api-Automation\\AdvancedFrameworkSeleniumJava\\src\\test\\resources\\propertyfiles\\log4j.properties");
+	        PropertyConfigurator.configure("D:\\Selenium_Cucumbe_-Karate_RestAssurred_API_Automation\\SeleniumJavaAutomation_NewSite\\src\\test\\resources\\propertyfiles\\log4j.properties");
 	    }
 	    @BeforeTest
 	    public void launchApplication() {
@@ -68,6 +69,15 @@ public class BaseTest extends Base{
 	    	loginDetails[0][1]= Commonconfig.password1;
 	    	loginDetails[1][0]= Commonconfig.userName2;
 	    	loginDetails[1][1]= Commonconfig.password2;
+	    	return loginDetails;
+	    	
+	    }
+	    
+	    @DataProvider(name = "loginDataFromExcel")
+	    public Object[][] loginDataWithExcel() {
+	    	
+	    	Object[][] loginDetails= new Object[2][2];
+	    	loginDetails=(Object[][]) ExcelUtil.testDataExcelReturnTwoDArray();
 	    	return loginDetails;
 	    	
 	    }
