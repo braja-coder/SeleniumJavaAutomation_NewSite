@@ -32,6 +32,7 @@ public class Commonconfig extends GetProperties{
 	
 	public static final String verifyTextLogin = getProperty("application.properties", "verifytextlogin");
 	public static final String verifyTextLoginFailed = getProperty("application.properties", "verifyfailedlogin");
+	public static final String verifyTextSignUpPage = getProperty("application.properties", "verifytextsignuppage");
 	
    
 }

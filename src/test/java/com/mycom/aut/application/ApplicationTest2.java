@@ -5,32 +5,38 @@ import org.testng.annotations.Test;
 
 import com.main.application.pages.HomePage;
 import com.main.application.pages.LoginPage;
+import com.main.application.pages.SignupPage;
 import com.main.coreframework.SeleniumUtil;
 import com.main.properties.Commonconfig;
 import com.mycom.aut.base.BaseTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import junit.framework.Assert;
 
 public class ApplicationTest2 extends BaseTest{
 
+	@Test
+	public void navigateToSignUpPage() {
+		HomePage homePage = new HomePage();
+		homePage.waitForPageToLoad();
+        test = report.startTest(this.getClass().getSimpleName());
+        test.log(LogStatus.INFO, "launched url");
+        log.info("launched URL for" + this.getClass().getSimpleName());  
+        homePage.signupLink.click();  
+        SeleniumUtil.switchToWindow();  
+	}
 	
 	@Test(dataProvider="loginData")
-	public void LoginTest(String email, String password) throws InterruptedException {
-		HomePage homePage = new HomePage();
-		homePage.loginLink.click();
-		LoginPage loginPage = new LoginPage();
-	//	loginPage.waitForPageToLoad();
-		SeleniumUtil.switchToWindow();
-		String loginText = loginPage.verifyLoginPage.getText();
-		Assert.assertEquals(Commonconfig.verifyTextLogin, loginText);
-		loginPage.inputEmail.sendKeys(email);
-		loginPage.inputPassword.sendKeys(password);
-		Thread.sleep(30000);
-		loginPage.buttonLogin.click();
-		String failedText = loginPage.verifyLoginFailed.getText();
-		System.out.println("**************************************" + failedText.trim());
-		Assert.assertEquals(Commonconfig.verifyTextLoginFailed, failedText.trim());
-		SeleniumUtil.switchToWindow();	
+	public void signUpTest(String email, String password) throws InterruptedException {
+		SignupPage signUpPage =  new SignupPage();
+		signUpPage.waitForPageToLoad();
+		test.log(LogStatus.INFO, "signup Page loaded");
+		Assert.assertEquals(signUpPage.verifySignUpPage(), Commonconfig.verifyTextSignUpPage);
+		signUpPage.firstName.sendKeys(Commonconfig.firstname);
+		signUpPage.firstName.sendKeys(Commonconfig.lastname);
+		signUpPage.firstName.sendKeys(Commonconfig.email);
+		
+		
 	}
 	
 	

@@ -22,6 +22,9 @@ public class SignupPage extends Base {
 	}
 	
 	String verifySignUpPageLoaded = "//a[contains(text(),'PHPTRAVELS')]";
+	
+	@FindBy (xpath="//h3[contains(text(),'Personal Information')]")
+	public WebElement verifySignUpPage;
 			
 	@FindBy (xpath="//input[@id='inputFirstName']")
 	public WebElement firstName;
@@ -67,6 +70,14 @@ public class SignupPage extends Base {
 	
 	@FindBy (xpath="//input[@type='submit']")
 	public WebElement registerButton;
+	
+
+	
+	
+	public String verifySignUpPage() {
+		String loginText = verifySignUpPage.getText();
+		return loginText;
+	}
 	
 	public void waitForPageToLoad() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
