@@ -3,17 +3,10 @@
  */
 package com.mycom.aut.application;
 
-import java.util.logging.Logger;
-
 import org.testng.annotations.Test;
-
 import com.google.common.base.Verify;
-import com.main.allvariables.Declarations;
-import com.main.application.pages.SignupPage;
 import com.main.application.pages.HomePage;
 import com.main.application.pages.LoginPage;
-import com.main.application.popups.CartPopup;
-import com.main.coreframework.Base;
 import com.main.coreframework.SeleniumUtil;
 import com.main.properties.Commonconfig;
 import com.mycom.aut.base.BaseTest;
@@ -28,25 +21,29 @@ public class ApplicationTest3 extends BaseTest {
 	public void navigateToLoginPage() {
 		HomePage homePage = new HomePage();
 		homePage.waitForPageToLoad();
-        test = report.startTest("in home page");
+        test = report.startTest(this.getClass().getSimpleName());
         test.log(LogStatus.INFO, "launched url");
-        log.info("launched URL");
-        homePage.loginLink.click();
-        SeleniumUtil.switchToWindow();
+        log.info("launched URL for" + this.getClass().getSimpleName());  
+        homePage.loginLink.click();  
+        SeleniumUtil.switchToWindow();  
 	}
     @Test(priority=0, dataProvider = "loginDataFromExcel",dataProviderClass = BaseTest.class, dependsOnMethods= {"navigateToLoginPage"})
      public void loginWithMultipleUser(String email, String password) {
     	try {
         LoginPage loginPage = new LoginPage();
         loginPage.waitForPageToLoad();
+        test.log(LogStatus.INFO, "Login Page loaded");
+        log.info("Login Page loaded");
         Assert.assertEquals(loginPage.verifyLoginPage(), Commonconfig.verifyTextLogin);
         loginPage.inputEmail.sendKeys(email);
         loginPage.inputPassword.sendKeys(password);
         loginPage.buttonLogin.click();
+        test.log(LogStatus.INFO, "clicked on login button");
+        log.info("Login in failed as expected");
     }catch(Exception e) {
     	e.printStackTrace();
     	Verify.verify(false, "Testc case failed");
-    	log.info("Test case failed");
+    	log.error("Test case failed due to" + e.getMessage());
        	test.log(LogStatus.ERROR, "testcase failed");
       }
     }

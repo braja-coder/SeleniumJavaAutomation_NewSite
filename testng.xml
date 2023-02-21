@@ -12,6 +12,9 @@
                <class
                     name="com.mycom.aut.application.ApplicationTest1">
                 </class>
+                <class
+                    name="com.mycom.aut.application.ApplicationTest3">
+                </class>
             </classes>
     </test>
     <!-- <test name="Test2">

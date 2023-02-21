@@ -6,32 +6,31 @@ package com.mycom.aut.base;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-
-import com.main.allvariables.Declarations;
-import com.main.application.pages.HomePage;
 import com.main.coreframework.Base;
 import com.main.coreframework.ExcelUtil;
 import com.main.coreframework.SeleniumUtil;
 import com.main.properties.Commonconfig;
 import com.main.report.ExtentReport;
-import com.mycom.aut.application.ApplicationTest1;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class BaseTest extends Base{
-	public Logger log;
+	protected static Logger log;
+	
 	 @BeforeSuite
 	    public void initializeExtentReportAndSetLogs() {
 	        report = ExtentReport.initializeReportConfig();
 	        log = Logger.getLogger(BaseTest.class);
 	        PropertyConfigurator.configure("D:\\Selenium_Cucumbe_-Karate_RestAssurred_API_Automation\\SeleniumJavaAutomation_NewSite\\src\\test\\resources\\propertyfiles\\log4j.properties");
 	    }
-	    @BeforeTest
+	    @BeforeClass
 	    public void launchApplication() {
 	    	setupDriver(Commonconfig.browser);
 	    	launchUrl(Commonconfig.URL);
@@ -54,7 +53,7 @@ public class BaseTest extends Base{
 
 	   
 
-	    @AfterTest
+	    @AfterClass
 	    public void logoutFromApplication() {
 	    	quitBrowser();
 	        report.endTest(test);
