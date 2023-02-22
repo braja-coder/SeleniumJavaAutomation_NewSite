@@ -32,7 +32,7 @@ public class SignupPage extends Base {
 	@FindBy (xpath="//input[@id='inputLastName']")
 	public WebElement lastName;
 	
-	@FindBy (xpath="//input[@id='inputEmail']")
+	@FindBy (xpath="//input[@id='inputEmail12234']")
 	public WebElement email;
 	
 	@FindBy (xpath="//div[@class='selected-flag']")

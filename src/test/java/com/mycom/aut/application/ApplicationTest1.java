@@ -3,6 +3,7 @@
  */
 package com.mycom.aut.application;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.annotations.Test;
 import com.google.common.base.Verify;
 import com.main.application.pages.HomePage;
@@ -39,11 +40,11 @@ public class ApplicationTest1 extends BaseTest {
         loginPage.buttonLogin.click();
         log.info("Login in failed as expected");
     }catch(Exception e) {
-    	e.printStackTrace();
-    	Verify.verify(false, "Testc case failed");
-    	log.error("Test case failed due to" + e.getMessage());
-    	test.log(LogStatus.ERROR, "testcase failed");
-      }
+		test.log(LogStatus.FAIL, ExceptionUtils.getRootCauseMessage(e));
+		log.error("Test case failed due to" + ExceptionUtils.getRootCauseMessage(e));
+		Verify.verify(false);		
+		
+	}
     }
  
 

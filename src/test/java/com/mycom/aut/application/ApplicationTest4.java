@@ -3,6 +3,7 @@
  */
 package com.mycom.aut.application;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.annotations.Test;
 import com.google.common.base.Verify;
 import com.main.application.pages.HomePage;
@@ -16,11 +17,12 @@ import junit.framework.Assert;
 
 
 public class ApplicationTest4 extends BaseTest {
+	private String testName = this.getClass().getSimpleName();
 	@Test
 	public void navigateToLoginPage() {
 		HomePage homePage = new HomePage();
 		homePage.waitForPageToLoad();
-        test = report.startTest(testMethodName);
+        test = report.startTest(testName);
         test.log(LogStatus.INFO, "launched url");
         log.info("launched URL for" + this.getClass().getSimpleName());  
         homePage.loginLink.click();  
@@ -40,12 +42,11 @@ public class ApplicationTest4 extends BaseTest {
         test.log(LogStatus.INFO, "clicked on login button");
         log.info("Login in failed as expected");
     }catch(Exception e) {
-    	e.printStackTrace();
-    	Verify.verify(false, "Testc case failed");
-    	log.error("Test case failed due to" + e.getMessage());
-       	test.log(LogStatus.ERROR, "testcase failed");
-      }
+		test.log(LogStatus.FAIL, ExceptionUtils.getRootCauseMessage(e));
+		log.error("Test case failed due to" + ExceptionUtils.getRootCauseMessage(e));
+		Verify.verify(false);		
+		
+	}
     }
- 
-
+   
 }

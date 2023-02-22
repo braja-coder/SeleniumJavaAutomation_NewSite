@@ -9,12 +9,18 @@
             </groups> -->
 
           <classes>
-               <class
+             <!--   <class
                     name="com.mycom.aut.application.ApplicationTest1">
-                </class>
+                </class> -->
                 <class
+                    name="com.mycom.aut.application.ApplicationTest2">
+                </class>
+                <!--  <class
                     name="com.mycom.aut.application.ApplicationTest3">
                 </class>
+                 <class
+                    name="com.mycom.aut.application.ApplicationTest4">
+                </class> -->
             </classes>
     </test>
     <!-- <test name="Test2">

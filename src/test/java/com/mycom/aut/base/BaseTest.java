@@ -41,18 +41,7 @@ public class BaseTest extends Base{
 	    	setupDriver(Commonconfig.browser);
 	    	launchUrl(Commonconfig.URL);
 	    }
-	    
-	@BeforeMethod
-	public void defineTestName(Method methodName) {
-		list = ExcelUtil.getTestCaseIds();
-		this.testMethodName = methodName.getName();
-		for (String str : list) {
-				if (testMethodName.contains(str)) {
-					this.getTestData = str;
-				}
-			}
-		System.out.println("############################################## gettestdata is in local: " + getTestData);
-	}
+	
 	    @AfterMethod(alwaysRun = true)
 	    public void getResult(ITestResult result) throws Exception {
 	        if (result.getStatus() == ITestResult.FAILURE) {
@@ -60,7 +49,7 @@ public class BaseTest extends Base{
 	            test.log(LogStatus.FAIL, "Test Case Failed is " + result.getThrowable());
 	            String screenshotPath = SeleniumUtil.captureScreenshot(driver, result.getName());
 	            test.log(LogStatus.FAIL, test.addScreenCapture(screenshotPath));
-	         
+	          //    test.log(LogStatus.INFO, (Throwable) test.getTest());
 	        } else if (result.getStatus() == ITestResult.SKIP) {
 	            test.log(LogStatus.SKIP, "Test Case Skipped is " + result.getName());
 	        }
@@ -99,12 +88,18 @@ public class BaseTest extends Base{
 	    }
 	    
 	    @DataProvider(name = "loginDataFromExcelWithTestCasId")
-	    public Object[][] dynamicDataGetForTestCase() {
-	    	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+getTestData);
-	    	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+testMethodName);
-	    	int rowCount = ExcelUtil.totalRowCount();
+	    public Object[][] dynamicDataGetForTestCase(Method testMethod) {
+	     	int rowCount = ExcelUtil.totalRowCount();
 	    	int columnCount = ExcelUtil.totalColumnCount();
 	    	Object[][] loginDetails= new Object[rowCount][columnCount];
+	    	list = ExcelUtil.getTestCaseIds();
+			String getTestData = null;
+		    String testMethodName = testMethod.getName();
+			for (String str : list) {
+					if (testMethodName.contains(str)) {
+						getTestData = str;
+					}
+				}
 	      	loginDetails=ExcelUtil.testDataExcel(getTestData);
 	    	return loginDetails;
 	    }
