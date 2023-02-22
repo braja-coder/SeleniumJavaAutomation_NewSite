@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
@@ -127,6 +128,16 @@ public class SeleniumUtil extends Base {
     public String getText(WebElement element) {
     
     	return element.getText();
+    }
+    
+    public static void selectElementFromDropdown(WebElement element1, WebElement element2, String text ) {
+    	element1.click();									
+    	List<WebElement> list = element2.findElements(By.tagName("span"));
+			System.out.println(list + "*********************************************************");
+		for(WebElement ele : list) {
+			ele.getText().contains(text);
+			ele.click();
+		}
     }
     
    

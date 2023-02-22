@@ -71,7 +71,11 @@ public class SignupPage extends Base {
 	@FindBy (xpath="//input[@type='submit']")
 	public WebElement registerButton;
 	
-
+	@FindBy (xpath="//div[@class='selected-flag']")
+	public WebElement clickonDropDown;
+	
+	@FindBy (xpath="//li[@data-dial-code='91']")
+	public WebElement getElements;
 	
 	
 	public String verifySignUpPage() {

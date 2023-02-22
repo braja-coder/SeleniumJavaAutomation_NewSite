@@ -16,12 +16,12 @@ import junit.framework.Assert;
 
 
 public class ApplicationTest3 extends BaseTest {
- 
+//	public String testName = this.getClass().getSimpleName();
 	@Test
 	public void navigateToLoginPage() {
 		HomePage homePage = new HomePage();
 		homePage.waitForPageToLoad();
-        test = report.startTest(this.getClass().getSimpleName());
+        test = report.startTest(testMethodName);
         test.log(LogStatus.INFO, "launched url");
         log.info("launched URL for" + this.getClass().getSimpleName());  
         homePage.loginLink.click();  

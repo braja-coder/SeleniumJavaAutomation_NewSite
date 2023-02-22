@@ -3,6 +3,10 @@
  */
 package com.mycom.aut.base;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
@@ -23,8 +27,10 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class BaseTest extends Base{
 	protected static Logger log;
-	
-	 @BeforeSuite
+	public String getTestData;
+	protected String testMethodName = null;
+	protected List<String> list = new ArrayList<String>(); 
+    @BeforeSuite
 	    public void initializeExtentReportAndSetLogs() {
 	        report = ExtentReport.initializeReportConfig();
 	        log = Logger.getLogger(BaseTest.class);
@@ -36,7 +42,18 @@ public class BaseTest extends Base{
 	    	launchUrl(Commonconfig.URL);
 	    }
 	    
-	   @AfterMethod(alwaysRun = true)
+	@BeforeMethod
+	public void defineTestName(Method methodName) {
+		list = ExcelUtil.getTestCaseIds();
+		this.testMethodName = methodName.getName();
+		for (String str : list) {
+				if (testMethodName.contains(str)) {
+					this.getTestData = str;
+				}
+			}
+		System.out.println("############################################## gettestdata is in local: " + getTestData);
+	}
+	    @AfterMethod(alwaysRun = true)
 	    public void getResult(ITestResult result) throws Exception {
 	        if (result.getStatus() == ITestResult.FAILURE) {
 	            test.log(LogStatus.FAIL, "Test Case Failed is " + result.getName());
@@ -76,9 +93,20 @@ public class BaseTest extends Base{
 	    public Object[][] loginDataWithExcel() {
 	    	
 	    	Object[][] loginDetails= new Object[2][2];
-	    	loginDetails=(Object[][]) ExcelUtil.testDataExcelReturnTwoDArray();
+	    	loginDetails=ExcelUtil.testDataExcelReturnTwoDArray();
 	    	return loginDetails;
 	    	
+	    }
+	    
+	    @DataProvider(name = "loginDataFromExcelWithTestCasId")
+	    public Object[][] dynamicDataGetForTestCase() {
+	    	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+getTestData);
+	    	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+testMethodName);
+	    	int rowCount = ExcelUtil.totalRowCount();
+	    	int columnCount = ExcelUtil.totalColumnCount();
+	    	Object[][] loginDetails= new Object[rowCount][columnCount];
+	      	loginDetails=ExcelUtil.testDataExcel(getTestData);
+	    	return loginDetails;
 	    }
 }
 
