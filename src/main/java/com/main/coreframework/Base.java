@@ -38,8 +38,11 @@ public class Base extends Declarations{
         driver.manage().window().maximize();
     }
 
-    public void quitBrowser() {
+    public void closeBrowser() {
         driver.close();
+        driver.quit();
+     }
+    public void quitBrowser() {
         driver.quit();
     }
 

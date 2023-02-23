@@ -34,7 +34,7 @@ public class ApplicationTest2 extends BaseTest{
         SeleniumUtil.switchToWindow();  
 	}
 	
-	@Test
+	@Test(priority=0,dependsOnMethods= {"navigateToSignUpPage"})
 	public void signUpTest() throws InterruptedException {
 		try {
 		SignupPage signUpPage =  new SignupPage();

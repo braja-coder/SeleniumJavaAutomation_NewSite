@@ -12,6 +12,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -36,12 +37,12 @@ public class BaseTest extends Base{
 	        log = Logger.getLogger(BaseTest.class);
 	        PropertyConfigurator.configure("D:\\Selenium_Cucumbe_-Karate_RestAssurred_API_Automation\\SeleniumJavaAutomation_NewSite\\src\\test\\resources\\propertyfiles\\log4j.properties");
 	    }
-	    @BeforeClass
+	    @BeforeTest
 	    public void launchApplication() {
 	    	setupDriver(Commonconfig.browser);
 	    	launchUrl(Commonconfig.URL);
 	    }
-	
+
 	    @AfterMethod(alwaysRun = true)
 	    public void getResult(ITestResult result) throws Exception {
 	        if (result.getStatus() == ITestResult.FAILURE) {
@@ -57,16 +58,15 @@ public class BaseTest extends Base{
 	        report.flush();
 	    }
 
-	   
-
-	    @AfterClass
-	    public void logoutFromApplication() {
-	    	quitBrowser();
+	    @AfterTest
+	    public void testsFinished() {
+	    	closeBrowser();
+	    //	quitBrowser();
 	        report.endTest(test);
 	        report.flush();
 	    }
 
-	    @DataProvider(name = "loginData")
+	   @DataProvider(name = "loginData")
 	    public Object[][] loginData() {
 	    	
 	    	Object[][] loginDetails= new Object[2][2];
