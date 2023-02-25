@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="AdvancedFrameworkSeleniumJava_newSite" thread-count="4" parallel="tests" verbose="4" preserve-order="true">
+<suite name="AdvancedFrameworkSeleniumJava_newSite" thread-count="5" parallel="tests" verbose="4" preserve-order="true">
 
    <test name="LoginTestsFirst">
         <!-- 	  <groups>
@@ -11,6 +11,7 @@
           <classes>
                <class name="com.mycom.aut.application.ApplicationTest1"/>
            </classes>
+              
     </test>
    <test name="SignUpTests">
             <classes>
