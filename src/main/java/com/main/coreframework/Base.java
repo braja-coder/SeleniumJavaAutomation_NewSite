@@ -3,6 +3,7 @@
  */
 package com.main.coreframework;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.main.allvariables.Declarations;
 import com.main.properties.Commonconfig;
+import com.paulhammant.ngwebdriver.NgWebDriver;
 
 public class Base extends Declarations{
 
@@ -27,6 +29,11 @@ public class Base extends Declarations{
         else if (browser.equalsIgnoreCase("chrome")){
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/chromedriver.exe");
             driver = new ChromeDriver();
+            jsDriver=(JavascriptExecutor) driver;
+            ngWebDriver = new NgWebDriver(jsDriver);
+            ngWebDriver.waitForAngularRequestsToFinish();
+           
+            
         }
     }
 

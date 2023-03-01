@@ -3,16 +3,20 @@
  */
 package com.main.allvariables;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.main.properties.GetProperties;
+import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
 public class Declarations {
 	public static WebDriver driver;
+	public static NgWebDriver ngWebDriver;
+	public static JavascriptExecutor jsDriver;
 	public static WebElement element;
     public static ExtentReports report;
     public static ExtentTest test;
