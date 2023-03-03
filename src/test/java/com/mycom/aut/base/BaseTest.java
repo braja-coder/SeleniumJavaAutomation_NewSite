@@ -21,6 +21,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import com.main.coreframework.Base;
 import com.main.coreframework.ExcelUtil;
+import com.main.coreframework.JsonUtil;
 import com.main.coreframework.SeleniumUtil;
 import com.main.properties.Commonconfig;
 import com.main.report.ExtentReport;
@@ -88,7 +89,7 @@ public class BaseTest extends Base{
 	    }
 	    
 	    @DataProvider(name = "loginDataFromExcelWithTestCasId")
-	    public Object[][] dynamicDataGetForTestCase(Method testMethod) {
+	    public Object[][] dynamicDataGetForTestCaseExcel(Method testMethod) {
 	     	int rowCount = ExcelUtil.totalRowCount();
 	    	int columnCount = ExcelUtil.totalColumnCount();
 	    	Object[][] loginDetails= new Object[rowCount][columnCount];
@@ -101,6 +102,15 @@ public class BaseTest extends Base{
 					}
 				}
 	      	loginDetails=ExcelUtil.testDataExcel(getTestData);
+	    	return loginDetails;
+	    }
+	    
+	    @DataProvider(name = "loginDataFromJson")
+	    public Object[][] dynamicDataGetForTestCaseJson() {
+	     	int rowCount = JsonUtil.getRowCount();
+	    	int columnCount = JsonUtil.getColCount();
+	    	Object[][] loginDetails= new Object[rowCount][columnCount];
+	    	loginDetails = JsonUtil.readDataFromJson();
 	    	return loginDetails;
 	    }
 }

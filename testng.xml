@@ -9,11 +9,11 @@
             </groups> -->
 
           <classes>
-               <class name="com.mycom.aut.application.ApplicationTest1"/>
+               <class name="com.mycom.aut.application.ApplicationTest5"/>
            </classes>
               
     </test>
-   <test name="Test2">
+  <!--  <test name="Test2">
             <classes>
                  <class name="com.mycom.aut.application.ApplicationTest2"/>
             </classes>
@@ -27,5 +27,5 @@
             <classes>
               <class name="com.mycom.aut.application.ApplicationTest4"/>
             </classes>
-    </test>
+    </test> -->
 </suite>

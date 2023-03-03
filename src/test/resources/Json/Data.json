@@ -1,0 +1,47 @@
+{
+	"menu": {
+		"id": "file",
+		"value": "File",
+		"popup": {
+			"menuitem": [
+				{
+					"value": "New",
+					"onclick": "CreateNewDoc()"
+				},
+				{
+					"value": "Open",
+					"onclick": "OpenDoc()"
+				},
+				{
+					"value": "Close",
+					"onclick": "CloseDoc()"
+				}
+			]
+		}
+	},
+	"menu1": {
+		"id": "file",
+		"value": "File",
+		"popup1": {
+			"menuitem1": [
+				{
+					"username": "brajasundardash82@gmail.com",
+					"password": "Lisha143!"
+				},
+				{
+					"username": "oceanbrajasundar@gmail.com",
+					"password": "lisha143!"
+				},
+				{
+					"username": "pinkilisha22@gmail.com",
+					"password": "pinkilisha143"
+				},
+				{
+					"username": "pinkilishamishra13@gmail.com",
+					"password": "lisha143"
+				}
+			]
+		}
+	}
+}
+
